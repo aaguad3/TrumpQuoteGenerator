@@ -1,6 +1,6 @@
 let positionX;
 let speedX;
-let dvdImage;
+let toggle = true;
 
 let x = Math.floor(Math.random() * 255);
 let y = Math.floor(Math.random() * 255);
@@ -8,6 +8,7 @@ let z = Math.floor(Math.random() * 255);
 
 function preload() {
   donald = loadImage('./images/donald.png');
+  donaldthumb = loadImage('./images/donaldthumb.png');
 }
 
 function setup() {
@@ -21,11 +22,19 @@ function setup() {
 }
 
 function draw() {
-  background(x, y, z);
-
+  // for(let i = 0; i < 255; i = i + 1) {
+    background(x, y, z);
+    // background(i, i, i);
+  // }
+  if(toggle !== true) {
+    image(donaldthumb, positionX, positionY, 100, 100);
+  }
+  else {
+    image(donald, positionX, positionY, 100, 100);
+  }
   fill(120, 80, 90);
   noStroke();
-  image(donald, positionX, positionY, 100, 100);
+
 
   positionX = positionX + speedX;
   positionY = positionY + speedY;
@@ -38,8 +47,12 @@ function draw() {
     speedY = speedY * -1;
   }
 
-  fill(255);
-  // textSize(32);
-  // text(speedX, 300, 100);
-  // ellipse(mouseX, mouseY, 70, 70);
+  // fill(255);
+}
+
+function keyPressed() {
+  toggle = !toggle;
+  for(let i = 0; i <= 253; i+=1) {
+    background(i, i/2, i/3);
+  }
 }
